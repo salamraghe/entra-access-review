@@ -1,12 +1,12 @@
-# Entra ID Access Review (Identity Governance)
+# Entra ID Access Review (P2)
 
-Hands-on lab, October 2026.
+Hands-on lab, October 2026 (done Oct 19).
 
 ## What this is and why it matters
 
 An access review checks access people **already have** and removes what they no longer need. I ran a one-time review of the group **MFA-Test-Group** in Microsoft Entra ID P2. **Test User** was a member but hadn't signed in for 30+ days, so I denied continued access with a reason, and Entra removed them automatically. The group went from **1 member to 0**.
 
-This is how companies keep access clean for audits: someone accountable confirms each person still needs access, and the removal is applied and logged, not done by hand. (A *new* access request is a different flow: approval workflow, like dual control in CyberArk.)
+This is how companies keep access clean for audits: someone accountable confirms each person still needs access, and the removal is applied and logged, not done by hand. It rechecks access people already have. Requests for *new* access are a separate flow (approval / dual control, like in my CyberArk lab).
 
 ## Environment
 
@@ -61,7 +61,9 @@ Entra recommended **Deny** because Test User was inactive. I denied with the rea
 ![Deny with reason](screenshots/09-deny-with-reason.png)
 ![Reviewer completed](screenshots/10-reviewer-completed.png)
 
-### 9. Stop the review so results apply → Complete, 1 denied
+### 9. Stop the review → Complete, 1 denied
+
+I stopped the review once the decision was in. **Apply** is grayed out because auto-apply was on, so Entra applied the deny by itself.
 
 ![Review stopped](screenshots/11-review-stopped.png)
 ![Review complete: 1 denied](screenshots/12-review-complete-1-denied.png)
@@ -83,5 +85,5 @@ At first I described this as denying someone who *requests* access. That's not w
 
 ## Notes
 
-- Object IDs and the review ID in the browser URL were blacked out in screenshots 07, 09, 11 and 12.
+- Blacked out in screenshots: object IDs, review/tenant IDs in the browser URL, and the tenant name (account email and user names).
 - Lab tenant and test accounts only; no real user data.
