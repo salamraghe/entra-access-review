@@ -1,89 +1,81 @@
 # Entra ID Access Review (P2)
 
-Hands-on lab, October 2026 (done Oct 19).
+Hands-on lab, Oct 2026.
 
-## What this is and why it matters
+Audit question: does everyone in this group still need to be there? An access review answers that for access people **already have**. I ran a one-time review of **MFA-Test-Group** in Entra ID P2. Test User hadn't signed in for 30+ days, so I denied with a reason, and auto-apply removed them. The group went from 1 member to 0.
 
-An access review checks access people **already have** and removes what they no longer need. I ran a one-time review of the group **MFA-Test-Group** in Microsoft Entra ID P2. **Test User** was a member but hadn't signed in for 30+ days, so I denied continued access with a reason, and Entra removed them automatically. The group went from **1 member to 0**.
+## What I built
 
-This is how companies keep access clean for audits: someone accountable confirms each person still needs access, and the removal is applied and logged, not done by hand. It rechecks access people already have. Requests for *new* access are a separate flow (approval / dual control, like in my CyberArk lab).
+- A one-time access review, **Q4 MFA-Test-Group** (Teams + Groups, all users), Lab Admin as reviewer, 3 days.
+- Settings: auto-apply results **on**, no change if reviewers don't respond, decision helper "no sign-in within 30 days", justification required.
+- As reviewer in My Access: denied Test User with the reason *"Test account, no longer needs MFA testing access."*
+- Stopped the review, and it completed with 1 denied. Auto-apply removed Test User, and the group showed 0 members.
+
+## What I learned
+
+In my own words:
+
+> "We did access review to be able to see we can deny if someone requests access, and we'll check to see if they're supposed to have it. We saw the group they wanted and we denied it, because that matters a lot, that we don't give access to people who aren't allowed to."
+
+*Coach-written at his request (correction):* an access review checks access people **already have**. It isn't a new request. Test User was already in MFA-Test-Group, inactive 30+ days, denied with a reason, and auto-apply removed them. New requests go through an approval workflow instead (like dual control in my CyberArk lab).
+
+*Interview line (coach-written at his request, from his one-page IAM Labs doc):*
+
+> "I ran an Entra access review on a group, found an inactive user who still had access, denied it with a reason, and auto apply removed them. That keeps least privilege and stops old access from piling up."
+
+## Key screenshots
+
+![](key/01-review-settings-auto-apply.png)
+*Review settings auto-apply results so denied users lose access automatically.*
+
+![](key/02-review-created.png)
+*Created a one-time access review for MFA-Test-Group members.*
+
+![](key/03-group-members-before.png)
+*Before the review, MFA-Test-Group has one member: Test User.*
+
+![](key/04-deny-with-reason.png)
+*As reviewer I denied Test User's access with a written reason.*
+
+![](key/05-review-complete-1-denied.png)
+*Review completed with one user denied, recorded on the overview page.*
+
+![](key/06-group-0-members-after.png)
+*After auto-apply, MFA-Test-Group has zero members: access removed.*
 
 ## Environment
 
 | Item | Value |
 | --- | --- |
-| Tenant | Entra ID lab tenant with **Microsoft Entra ID P2** (needed for access reviews) |
-| Review | **Q4 MFA-Test-Group** (Teams + Groups, scope: All users) |
+| Tenant | Entra ID lab tenant with Microsoft Entra ID P2 |
+| Review | Q4 MFA-Test-Group (Teams + Groups, all users) |
 | Reviewer | Lab Admin |
-| Duration / recurrence | 3 days, one time, start 10/19/2026 |
+| Duration / recurrence | 3 days, one time |
 | Member reviewed | Test User |
 
-## Steps
+## What broke / issues I fixed
 
-### 1. Confirm the P2 license
+- Nothing broke technically. What I fixed was my understanding: I first described it as denying a *request*. An access review re-checks *existing* access.
 
-![P2 license](screenshots/01-p2-license-status.png)
+## Gaps
 
-### 2. Identity Governance → Access reviews
+- One group and one member, in a lab tenant. No recurring review and no multi-reviewer setup shown.
+- Blacked out in screenshots: tenant name, account email/UPNs, object/review/tenant IDs.
 
-![Access reviews page](screenshots/02-access-reviews-page.png)
+<details><summary>Full proof (all screenshots)</summary>
 
-### 3. Review type: Teams + Groups → MFA-Test-Group, All users
+![](full-proof/01-p2-license-status.png)
 
-![Review type](screenshots/03-review-type.png)
+![](full-proof/02-access-reviews-page.png)
 
-### 4. Reviewer: Lab Admin, 3 days, one time
+![](full-proof/03-review-type.png)
 
-![Reviewers](screenshots/04-reviewers.png)
+![](full-proof/04-reviewers.png)
 
-### 5. Settings
+![](full-proof/08-review-active.png)
 
-- Auto apply results to resource: **on**
-- If reviewers don't respond: **No change**
-- Decision helper: **No sign-in within 30 days**
-- Justification required, email notifications and reminders: **on**
+![](full-proof/10-reviewer-completed.png)
 
-![Settings](screenshots/05-settings.png)
+![](full-proof/11-review-stopped.png)
 
-### 6. Review created, then active
-
-![Review created](screenshots/06-review-created.png)
-![Review active](screenshots/08-review-active.png)
-
-### 7. Before: MFA-Test-Group has 1 member (Test User)
-
-![Group before](screenshots/07-mfa-test-group-members-before.png)
-
-### 8. Reviewer decision in My Access: Deny, with a reason
-
-Entra recommended **Deny** because Test User was inactive. I denied with the reason: *"Test account, no longer needs MFA testing access."*
-
-![Deny with reason](screenshots/09-deny-with-reason.png)
-![Reviewer completed](screenshots/10-reviewer-completed.png)
-
-### 9. Stop the review → Complete, 1 denied
-
-I stopped the review once the decision was in. **Apply** is grayed out because auto-apply was on, so Entra applied the deny by itself.
-
-![Review stopped](screenshots/11-review-stopped.png)
-![Review complete: 1 denied](screenshots/12-review-complete-1-denied.png)
-
-### 10. After: MFA-Test-Group has 0 members
-
-![Group after: 0 members](screenshots/13-group-0-members-after.png)
-
-## What I got wrong at first, and fixed
-
-At first I described this as denying someone who *requests* access. That's not what an access review is. It reviews access people **already have**. New requests go through an approval workflow instead. I corrected my understanding during the lab.
-
-## Skills shown
-
-- **IAM Support:** running a group access review, documenting a deny with justification, confirming removal
-- **IAM Engineer / Identity Governance:** configuring Entra ID P2 access reviews (scope, reviewers, auto-apply, decision helpers)
-- **PAM / least privilege:** removing inactive access automatically, audit-ready evidence
-- Knowing the difference between access reviews (recertification) and access requests (approval)
-
-## Notes
-
-- Blacked out in screenshots: object IDs, review/tenant IDs in the browser URL, and the tenant name (account email and user names).
-- Lab tenant and test accounts only; no real user data.
+</details>
