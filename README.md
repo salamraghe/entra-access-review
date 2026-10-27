@@ -17,9 +17,9 @@ In my own words:
 
 > "We did access review to be able to see we can deny if someone requests access, and we'll check to see if they're supposed to have it. We saw the group they wanted and we denied it, because that matters a lot, that we don't give access to people who aren't allowed to."
 
-*Coach-written at his request (correction):* an access review checks access people **already have**. It isn't a new request. Test User was already in MFA-Test-Group, inactive 30+ days, denied with a reason, and auto-apply removed them. New requests go through an approval workflow instead (like dual control in my CyberArk lab).
+*Correction:* an access review checks access people **already have**. It isn't a new request. Test User was already in MFA-Test-Group, inactive 30+ days, denied with a reason, and auto-apply removed them. New requests go through an approval workflow instead (like dual control in my CyberArk lab).
 
-*Interview line (coach-written at his request, from his one-page IAM Labs doc):*
+*Interview line:*
 
 > "I ran an Entra access review on a group, found an inactive user who still had access, denied it with a reason, and auto apply removed them. That keeps least privilege and stops old access from piling up."
 
