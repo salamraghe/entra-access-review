@@ -13,8 +13,6 @@ Audit question: does everyone in this group still need to be there? An access re
 
 ## What I learned
 
-In my own words:
-
 > "We did access review to be able to see we can deny if someone requests access, and we'll check to see if they're supposed to have it. We saw the group they wanted and we denied it, because that matters a lot, that we don't give access to people who aren't allowed to."
 
 *Correction:* an access review checks access people **already have**. It isn't a new request. Test User was already in MFA-Test-Group, inactive 30+ days, denied with a reason, and auto-apply removed them. New requests go through an approval workflow instead (like dual control in my CyberArk lab).
