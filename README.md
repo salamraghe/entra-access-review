@@ -19,10 +19,6 @@ In my own words:
 
 *Correction:* an access review checks access people **already have**. It isn't a new request. Test User was already in MFA-Test-Group, inactive 30+ days, denied with a reason, and auto-apply removed them. New requests go through an approval workflow instead (like dual control in my CyberArk lab).
 
-*Interview line:*
-
-> "I ran an Entra access review on a group, found an inactive user who still had access, denied it with a reason, and auto apply removed them. That keeps least privilege and stops old access from piling up."
-
 ## Key screenshots
 
 ![](key/01-review-settings-auto-apply.png)
